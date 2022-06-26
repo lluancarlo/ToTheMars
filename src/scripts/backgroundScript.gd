@@ -12,7 +12,7 @@ enum ATMOSPHERE{
 	space = 6
 }
 
-var _backgroundSpeed = 5
+export(int) var _backgroundSpeed = 5
 var _seconds = 0
 var _currentAtmosphere = ATMOSPHERE.troposphere
 var _transTroposToStratos = true
