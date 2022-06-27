@@ -1,10 +1,13 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://src/sprites/spaceship_sprite.png" type="Texture" id=1]
 [ext_resource path="res://src/sprites/fire_sprite.png" type="Texture" id=2]
 [ext_resource path="res://src/sprites/background_sprite.png" type="Texture" id=3]
-[ext_resource path="res://src/scripts/playerController.gd" type="Script" id=4]
-[ext_resource path="res://src/scripts/backgroundScript.gd" type="Script" id=5]
+[ext_resource path="res://src/scripts/PlayerController.gd" type="Script" id=4]
+[ext_resource path="res://src/scripts/BackgroundScript.gd" type="Script" id=5]
+[ext_resource path="res://src/scripts/ItemGenerator.gd" type="Script" id=6]
+[ext_resource path="res://src/resource/Meteorite.res" type="PackedScene" id=7]
+[ext_resource path="res://src/scripts/Game.gd" type="Script" id=8]
 
 [sub_resource type="AtlasTexture" id=13]
 flags = 4
@@ -142,14 +145,29 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=30]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 50, 130 )
 
+[sub_resource type="AtlasTexture" id=31]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 50, 0, 50, 130 )
+
+[sub_resource type="AtlasTexture" id=32]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 100, 0, 50, 130 )
+
+[sub_resource type="AtlasTexture" id=33]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 150, 0, 50, 130 )
+
 [sub_resource type="SpriteFrames" id=11]
 animations = [ {
-"frames": [ SubResource( 10 ) ],
+"frames": [ SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ) ],
 "loop": true,
 "name": "spaceship_anim",
 "speed": 5.0
@@ -159,12 +177,13 @@ animations = [ {
 radius = 26.0
 height = 76.0
 
-[node name="node2D" type="Node2D"]
+[node name="Game" type="Node2D"]
+script = ExtResource( 8 )
 
-[node name="node2D" type="Node2D" parent="."]
+[node name="BackgroundEngine" type="Node2D" parent="."]
 script = ExtResource( 5 )
 
-[node name="roller02" type="AnimatedSprite" parent="node2D"]
+[node name="roller02" type="AnimatedSprite" parent="BackgroundEngine"]
 position = Vector2( 0, -775 )
 scale = Vector2( 1.55, 1.55 )
 frames = SubResource( 29 )
@@ -172,28 +191,31 @@ animation = "background_anim"
 frame = 14
 centered = false
 
-[node name="roller01" type="AnimatedSprite" parent="node2D"]
+[node name="roller01" type="AnimatedSprite" parent="BackgroundEngine"]
 scale = Vector2( 1.55, 1.55 )
 frames = SubResource( 29 )
 animation = "background_anim"
 frame = 15
 centered = false
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+[node name="ItemGenerator" type="Node2D" parent="."]
+script = ExtResource( 6 )
+_meteorite = ExtResource( 7 )
+
+[node name="Player" type="KinematicBody2D" parent="."]
 position = Vector2( 640, 550 )
 script = ExtResource( 4 )
 
-[node name="AnimatedSpriteFire" type="AnimatedSprite" parent="KinematicBody2D"]
+[node name="AnimatedSpriteFire" type="AnimatedSprite" parent="Player"]
 position = Vector2( 0, 83 )
 frames = SubResource( 9 )
 animation = "fire_anim"
-frame = 4
+frame = 5
 playing = true
 
-[node name="AnimatedSpriteSpaceship" type="AnimatedSprite" parent="KinematicBody2D"]
+[node name="AnimatedSpriteSpaceship" type="AnimatedSprite" parent="Player"]
 frames = SubResource( 11 )
 animation = "spaceship_anim"
-playing = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource( 12 )

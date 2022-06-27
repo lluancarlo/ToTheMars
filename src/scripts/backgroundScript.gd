@@ -1,70 +1,52 @@
 extends Node2D
 
-onready var RollOne = $roller01
-onready var RollTwo = $roller02
+# Imports
+const Enums = preload("res://src/scripts/Enums.gd")
 
-enum ATMOSPHERE{
-	troposphere = 1,
-	stratosphere = 2,
-	mesosphere = 3,
-	thermosphere = 4,
-	exosphere = 5,
-	space = 6
-}
+# Global Variables
+onready var Global = get_node("/root/Global")
+onready var _rollOne: Node2D = $roller01
+onready var _rollTwo: Node2D = $roller02
+export(int) var _backgroundSpeed: int = 5
+var _seconds: float = 0
+var _transTroposToStratos: bool = true
+var _transStratosToMesos: bool = true
+var _transMesosToThermos: bool = true
+var _transThermosToExos: bool = true
+var _transExosToSpace: bool = true
+var _alreadyShowedMoon: bool = false
+var _alreadyShowedMars: bool = false
+var _randGenerate: RandomNumberGenerator = RandomNumberGenerator.new()
 
-export(int) var _backgroundSpeed = 5
-var _seconds = 0
-var _currentAtmosphere = ATMOSPHERE.troposphere
-var _transTroposToStratos = true
-var _transStratosToMesos = true
-var _transMesosToThermos = true
-var _transThermosToExos = true
-var _transExosToSpace = true
-var _alreadyShowedMoon = false
-var _alreadyShowedMars = false
-var _randGenerate = RandomNumberGenerator.new()
-
-func updateAtmosphere():
-	if round(_seconds) == 5:
-		_currentAtmosphere = ATMOSPHERE.stratosphere
-	elif round(_seconds) == 10:
-		_currentAtmosphere = ATMOSPHERE.mesosphere
-	elif round(_seconds) == 15:
-		_currentAtmosphere = ATMOSPHERE.thermosphere
-	elif round(_seconds) == 20:
-		_currentAtmosphere = ATMOSPHERE.exosphere
-	elif round(_seconds) == 25:
-		_currentAtmosphere = ATMOSPHERE.space
-	pass
+# Private Functions
+func getFrame(currentAtmosphere: int) -> int:
+	var randomValue: int = 0
 	
-func getFrame():
-	var randomValue = 0
-	
-	if _currentAtmosphere == ATMOSPHERE.stratosphere:
+	if currentAtmosphere == Enums.Atmosphere.Stratosphere:
 		if _transTroposToStratos:
 			randomValue = 12
 			_transTroposToStratos = false
 		else:
 			randomValue = _randGenerate.randi_range(10, 11)
-	elif _currentAtmosphere == ATMOSPHERE.mesosphere:
+	elif currentAtmosphere == Enums.Atmosphere.Mesosphere:
 		if _transStratosToMesos:
 			randomValue = 9
 			_transStratosToMesos = false
 		else:
 			randomValue = 8
-	elif _currentAtmosphere == ATMOSPHERE.thermosphere:
+	elif currentAtmosphere == Enums.Atmosphere.Thermosphere:
 		if _transMesosToThermos:
 			randomValue = 7
 			_transMesosToThermos = false
 		else:
 			randomValue = 6
-	elif _currentAtmosphere == ATMOSPHERE.exosphere:
+	elif currentAtmosphere == Enums.Atmosphere.Exosphere:
 		if _transThermosToExos:
 			randomValue = 5
 			_transThermosToExos = false
 		else:
 			randomValue = 4
-	elif _currentAtmosphere == ATMOSPHERE.space:
+	elif currentAtmosphere == Enums.Atmosphere.Space:
 		if _transExosToSpace:
 			randomValue = 3
 			_transExosToSpace = false
@@ -79,14 +61,14 @@ func getFrame():
 				randomValue = 2
 	else:
 		randomValue = _randGenerate.randi_range(13, 15)
-	
 	return randomValue
 
-func checkAndMoveSprite(node):
+func checkAndMoveSprite(node) -> void:
 	if node.position > Vector2(0, 774):
-		node.frame = getFrame()
+		node.frame = getFrame(Global.InGame.CurrentAtmosphere)
 		node.position = Vector2(0, -775)
 
+# Engine Functions
 func _ready():
 	_randGenerate.randomize()
 	pass
@@ -94,10 +76,9 @@ func _ready():
 func _process(delta):
 	_seconds += delta
 	
-	checkAndMoveSprite(RollOne)
-	checkAndMoveSprite(RollTwo)
-	RollOne.move_local_y(_backgroundSpeed)
-	RollTwo.move_local_y(_backgroundSpeed)
-	updateAtmosphere()
+	checkAndMoveSprite(_rollOne)
+	checkAndMoveSprite(_rollTwo)
+	_rollOne.move_local_y(_backgroundSpeed)
+	_rollTwo.move_local_y(_backgroundSpeed)
 		
 	pass

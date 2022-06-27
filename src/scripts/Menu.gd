@@ -1,5 +1,7 @@
 extends Container
 
+# Global Variables
+onready var Firebase = get_node("/root/Firebase")
 onready var _http : HTTPRequest = $HTTPRequestForm
 onready var _nameValue : Label = $LabelNameValue
 onready var _travelsMadeValue : Label = $LabelTravelsMadeValue
@@ -10,13 +12,7 @@ onready var _continueButton : Button = $ButtonContinue
 onready var _startButton : Button = $ButtonStart
 onready var _changeUserButton : Button = $ButtonChangeUser
 
-func _ready():
-	_continueButton.visible = false
-	_startButton.visible = false
-	_changeUserButton.visible = false
-	#Firebase.login(_http)
-	pass
-
+# Actions Functions
 func _on_InputPlayerName_text_changed(new_text):
 	if new_text.length() > 2:
 		_continueButton.visible = true
@@ -52,3 +48,14 @@ func _on_ButtonChangeUser_pressed():
 	_lastTravelValue.text = "Never"
 	_travelsMadeValue.text = str("0")
 	_distanceValue.text = str("0")
+
+func _on_ButtonStart_pressed():
+	get_tree().change_scene("res://src/scenes/game.tscn")
+
+# Engine Functions
+func _ready():
+	_continueButton.visible = false
+	_startButton.visible = false
+	_changeUserButton.visible = false
+	#Firebase.login(_http)
+	pass

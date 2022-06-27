@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/sprites/menu_01_sprite.png" type="Texture" id=1]
 [ext_resource path="res://src/fonts/default.tres" type="DynamicFont" id=2]
-[ext_resource path="res://src/scripts/mainFormControl.gd" type="Script" id=3]
+[ext_resource path="res://src/scripts/Menu.gd" type="Script" id=3]
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 1, 1, 1, 0 )
@@ -147,4 +147,5 @@ text = "Change User"
 
 [connection signal="text_changed" from="Form/InputPlayerName" to="Form" method="_on_InputPlayerName_text_changed"]
 [connection signal="pressed" from="Form/ButtonContinue" to="Form" method="_on_ButtonContinue_pressed"]
+[connection signal="pressed" from="Form/ButtonStart" to="Form" method="_on_ButtonStart_pressed"]
 [connection signal="pressed" from="Form/ButtonChangeUser" to="Form" method="_on_ButtonChangeUser_pressed"]

@@ -1,15 +1,17 @@
 extends Node
 
+# Const
 const USER_NAME := "game-client@mail.com"
 const USER_PASS := "3kNMmndC8hofBA32"
 const API_KEY := "AIzaSyDA0RWAUfRNrQ5VrbhGVGq8VNaNykL_Lhw"
 const PROJECT_ID := "tothemars-godot"
-
 const LOGIN_URL := "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=%s" % API_KEY
 const FIRESTORE_URL := "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents/" % PROJECT_ID
 
+# Global Variables
 var user_info := {}
 
+# Functions
 func _get_user_info(result: Array) -> Dictionary:
 	var result_body := JSON.parse(result[3].get_string_from_ascii()).result as Dictionary
 	return {
@@ -49,7 +51,6 @@ func get_playerInfo(playerName: String, http: HTTPRequest) -> Player:
 						int(players[i].fields.maxScore["integerValue"]),
 						int(players[i].fields.plays["integerValue"])
 					)
-					break
 		_:
 			print("User not found!")
 			return null

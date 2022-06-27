@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "Player",
 "language": "GDScript",
-"path": "res://src/scripts/class/player.gd"
+"path": "res://src/scripts/class/Player.gd"
 } ]
 _global_script_class_icons={
 "Player": ""
@@ -21,12 +21,13 @@ _global_script_class_icons={
 [application]
 
 config/name="ToTheMars"
-run/main_scene="res://src/scenes/game.tscn"
+run/main_scene="res://src/scenes/menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-Firebase="*res://src/scripts/firebase.gd"
+Global="*res://src/scripts/static/Global.gd"
+Firebase="*res://src/scripts/static/Firebase.gd"
 
 [display]
 
@@ -37,6 +38,7 @@ window/size/resizable=false
 [global]
 
 display=false
+scene=false
 
 [input]
 
