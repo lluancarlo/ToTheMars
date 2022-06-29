@@ -4,7 +4,7 @@
 [ext_resource path="res://src/sprites/fire_sprite.png" type="Texture" id=2]
 [ext_resource path="res://src/sprites/background_sprite.png" type="Texture" id=3]
 [ext_resource path="res://src/scripts/PlayerController.gd" type="Script" id=4]
-[ext_resource path="res://src/scripts/BackgroundScript.gd" type="Script" id=5]
+[ext_resource path="res://src/scripts/BackgroundControl.gd" type="Script" id=5]
 [ext_resource path="res://src/scripts/ItemGenerator.gd" type="Script" id=6]
 [ext_resource path="res://src/resource/Meteorite.res" type="PackedScene" id=7]
 [ext_resource path="res://src/scripts/Game.gd" type="Script" id=8]
@@ -173,9 +173,9 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=12]
-radius = 26.0
-height = 76.0
+[sub_resource type="CapsuleShape2D" id=34]
+radius = 22.0
+height = 86.0
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 8 )
@@ -200,7 +200,7 @@ centered = false
 
 [node name="ItemGenerator" type="Node2D" parent="."]
 script = ExtResource( 6 )
-_meteorite = ExtResource( 7 )
+Meteorite = ExtResource( 7 )
 
 [node name="Player" type="KinematicBody2D" parent="."]
 position = Vector2( 640, 550 )
@@ -210,7 +210,7 @@ script = ExtResource( 4 )
 position = Vector2( 0, 83 )
 frames = SubResource( 9 )
 animation = "fire_anim"
-frame = 5
+frame = 4
 playing = true
 
 [node name="AnimatedSpriteSpaceship" type="AnimatedSprite" parent="Player"]
@@ -218,4 +218,4 @@ frames = SubResource( 11 )
 animation = "spaceship_anim"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource( 12 )
+shape = SubResource( 34 )

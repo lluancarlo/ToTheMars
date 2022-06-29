@@ -1,18 +1,18 @@
 class_name Player
 
-var name: String
-var lastPlayed: String
-var score: int
-var plays: int
+var Name: String
+var LastPlayed: String
+var Score: int
+var Plays: int
 
 func _init(name: String, lastPlayed: String, score: int, plays: int ):
-	self.name = name.replace(" ","").capitalize()
-	self.score = score
-	self.plays = plays
+	self.Name = name.replace(" ","").capitalize()
+	self.Score = score
+	self.Plays = plays
 	if lastPlayed.length() > 18:
-		self.lastPlayed = convertDate(lastPlayed)
+		self.LastPlayed = convertDate(lastPlayed)
 	else:
-		self.lastPlayed = "Never"
+		self.LastPlayed = "Never"
 
 #{day:25, dst:True, hour:21, minute:11, month:6, second:54, weekday:6, year:2022}
 func convertDate(date: String):

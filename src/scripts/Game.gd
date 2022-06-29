@@ -4,29 +4,32 @@ extends Node
 const Enums = preload("res://src/scripts/Enums.gd")
 
 # Global Variables
-onready var Global = get_node("/root/Global")
-var _seconds: float = 0
+var Seconds: float = 0
+var Score = 0
+var Health = 0
+var CurrentAtmosphere = Enums.Atmosphere.Troposphere
 
 # Private Functions
 func updateAtmosphere() -> void:
 	var at = null
-	if round(_seconds) == 2:
+	if round(self.Seconds) == 2:
 		at = Enums.Atmosphere.Stratosphere
-	elif round(_seconds) == 5:
+	elif round(self.Seconds) == 5:
 		at = Enums.Atmosphere.Mesosphere
-	elif round(_seconds) == 8:
+	elif round(self.Seconds) == 8:
 		at = Enums.Atmosphere.Thermosphere
-	elif round(_seconds) == 11:
+	elif round(self.Seconds) == 11:
 		at = Enums.Atmosphere.Exosphere
-	elif round(_seconds) == 15:
+	elif round(self.Seconds) == 15:
 		at = Enums.Atmosphere.Space
 	if at != null:
-		Global.InGame.CurrentAtmosphere = at
+		self.CurrentAtmosphere = at
 
 # Engine Functions
 func _ready():
+	self.Health = 3
 	pass
 
 func _process(delta):
-	_seconds += delta
+	self.Seconds += delta
 	updateAtmosphere()

@@ -9,7 +9,7 @@ const LOGIN_URL := "https://www.googleapis.com/identitytoolkit/v3/relyingparty/v
 const FIRESTORE_URL := "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents/" % PROJECT_ID
 
 # Global Variables
-var user_info := {}
+var User_info := {}
 
 # Functions
 func _get_user_info(result: Array) -> Dictionary:
@@ -31,7 +31,7 @@ func login(http: HTTPRequest) -> void:
 	http.request(LOGIN_URL, [], false, HTTPClient.METHOD_POST, to_json(body))
 	var result := yield(http, "request_completed") as Array
 	if result[1] == 200:
-		user_info = _get_user_info(result)
+		self.User_info = _get_user_info(result)
 
 func get_playerInfo(playerName: String, http: HTTPRequest) -> Player:
 	var url := FIRESTORE_URL + "players"

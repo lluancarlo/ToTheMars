@@ -26,7 +26,6 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Global="*res://src/scripts/static/Global.gd"
 Firebase="*res://src/scripts/static/Firebase.gd"
 
 [display]
