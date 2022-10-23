@@ -1,0 +1,204 @@
+[gd_scene load_steps=31 format=2]
+
+[ext_resource path="res://src/resource/Player.res" type="PackedScene" id=1]
+[ext_resource path="res://src/resource/MeteoriteHitParticle.res" type="PackedScene" id=2]
+[ext_resource path="res://src/sprites/background_sprite.png" type="Texture" id=3]
+[ext_resource path="res://src/sprites/launchpad_sprite.png" type="Texture" id=4]
+[ext_resource path="res://src/scripts/game/BackgroundControl.gd" type="Script" id=5]
+[ext_resource path="res://src/scripts/game/ItemGenerator.gd" type="Script" id=6]
+[ext_resource path="res://src/resource/Meteorite.res" type="PackedScene" id=7]
+[ext_resource path="res://src/scripts/game/Game.gd" type="Script" id=8]
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 1024, 500 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 500, 1024, 500 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 1000, 1024, 500 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 1500, 1024, 500 )
+
+[sub_resource type="AtlasTexture" id=17]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 2000, 1024, 500 )
+
+[sub_resource type="AtlasTexture" id=18]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 2500, 1024, 500 )
+
+[sub_resource type="AtlasTexture" id=19]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 3000, 1024, 500 )
+
+[sub_resource type="AtlasTexture" id=20]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 3500, 1024, 500 )
+
+[sub_resource type="AtlasTexture" id=21]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 4000, 1024, 500 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 4500, 1024, 500 )
+
+[sub_resource type="AtlasTexture" id=23]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 5000, 1024, 500 )
+
+[sub_resource type="AtlasTexture" id=24]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 5500, 1024, 500 )
+
+[sub_resource type="AtlasTexture" id=25]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 6000, 1024, 500 )
+
+[sub_resource type="AtlasTexture" id=26]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 6500, 1024, 500 )
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 7000, 1024, 500 )
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 7500, 1024, 500 )
+
+[sub_resource type="AtlasTexture" id=30]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 8000, 1024, 500 )
+
+[sub_resource type="SpriteFrames" id=29]
+animations = [ {
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 30 ) ],
+"loop": true,
+"name": "background_anim",
+"speed": 5.0
+} ]
+
+[sub_resource type="Gradient" id=31]
+offsets = PoolRealArray( 0.0129032, 0.722581, 1 )
+colors = PoolColorArray( 0.255585, 0.255585, 0.261719, 1, 0.492218, 0.492218, 0.496094, 1, 0.609375, 0.609375, 0.609375, 1 )
+
+[sub_resource type="GradientTexture" id=32]
+gradient = SubResource( 31 )
+
+[sub_resource type="ParticlesMaterial" id=33]
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_disable_z = true
+spread = 20.0
+gravity = Vector3( 0, -10, 0 )
+initial_velocity = 40.0
+initial_velocity_random = 0.9
+angular_velocity = 150.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 10.0
+linear_accel_random = 1.0
+damping = 10.0
+damping_random = 0.1
+scale = 3.0
+scale_random = 1.0
+color_ramp = SubResource( 32 )
+
+[sub_resource type="ParticlesMaterial" id=34]
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_disable_z = true
+direction = Vector3( -1, 0, 0 )
+spread = 20.0
+gravity = Vector3( 0, -10, 0 )
+initial_velocity = 40.0
+initial_velocity_random = 0.9
+angular_velocity = 150.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 10.0
+linear_accel_random = 1.0
+damping = 10.0
+damping_random = 0.1
+scale = 3.0
+scale_random = 1.0
+color_ramp = SubResource( 32 )
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 8 )
+
+[node name="BackgroundEngine" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="roller03" type="AnimatedSprite" parent="BackgroundEngine"]
+position = Vector2( 0, -1200 )
+scale = Vector2( 1.2, 1.2 )
+frames = SubResource( 29 )
+animation = "background_anim"
+frame = 14
+centered = false
+
+[node name="roller02" type="AnimatedSprite" parent="BackgroundEngine"]
+position = Vector2( 0, -600 )
+scale = Vector2( 1.2, 1.2 )
+frames = SubResource( 29 )
+animation = "background_anim"
+frame = 14
+centered = false
+
+[node name="roller01" type="AnimatedSprite" parent="BackgroundEngine"]
+scale = Vector2( 1.2, 1.2 )
+frames = SubResource( 29 )
+animation = "background_anim"
+frame = 16
+centered = false
+
+[node name="launchpad" type="Sprite" parent="BackgroundEngine"]
+position = Vector2( 547, 486 )
+texture = ExtResource( 4 )
+
+[node name="SmokeRight" type="Particles2D" parent="BackgroundEngine/launchpad"]
+position = Vector2( -26, 79 )
+amount = 5000
+lifetime = 3.0
+process_material = SubResource( 33 )
+
+[node name="SmokeLeft" type="Particles2D" parent="BackgroundEngine/launchpad"]
+position = Vector2( -41, 78 )
+amount = 5000
+lifetime = 3.0
+process_material = SubResource( 34 )
+
+[node name="ItemGenerator" type="Node2D" parent="."]
+script = ExtResource( 6 )
+Meteorite = ExtResource( 7 )
+MeteoriteHitParticle = ExtResource( 2 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 512, 464 )
